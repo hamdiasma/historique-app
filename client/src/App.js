@@ -1,13 +1,16 @@
 
-import {BrowserRouter as  Router } from "react-router-dom"
-
+import {BrowserRouter as  Router,Route } from "react-router-dom"
+import PageRoute from "./PageRoute";
 function App() {
   return (
     <Router>
      <input  type="checkbox" id="theme"/>
     <div className="App">
      <div className="main">
-       hello hamdi</div>  
+       <Route exact path="/:page" component={PageRoute}/>
+       <Route exact path="/:page/:id" component={PageRoute}/>
+       
+       </div>  
   </div>
   </Router>
   );
