@@ -127,7 +127,34 @@ logout:async (req,res)=>{
 },
 generateAccessToken:async (req,res)=>{
     try {
-        
+        const refresh_token = req.cookies.socialtoken
+        if(!refresh_token){
+        return res
+          .status(400)
+          .json({ err: `Authentication denied.!` });
+        }
+
+await jwt.verify(refresh_token,process.env.REFRESH_TOKEN_SECRET,async (err,result)=>{
+    if(err)  return res
+    .status(400)
+    .json({ err: `Authentication denied.!` });
+const user = await User.findById(result.id)
+.select(["-password","-defaultpassword"])
+.populate('followers following',["-password","-defaultpassword"])
+
+    if(!user)  return res
+    .status(400)
+    .json({ err: `Authentication denied.!` });
+
+    const access_token = createAccessToken({id:result.id})
+        res.json({
+            access_token,
+            user
+        })
+     })
+     
+
+
     } catch (error) {
         return res.status(500).json({msg:error.message})
     }
