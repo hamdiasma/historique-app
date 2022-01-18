@@ -3,3 +3,7 @@ export const authTypes = {
     LOGOUT_USER:"LOGOUT_USER",
     REGISTER_USER:"REGISTER_USER",
 }
+
+export const notifyTypes = {
+    NOTIFY:"NOTIFY",
+}
