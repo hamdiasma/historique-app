@@ -4,9 +4,6 @@ const jwt = require('jsonwebtoken')
 const req = require('express/lib/request')
 
 
-
-
-
 const authCtrl={
 register:async (req,res)=>{
     try {
@@ -22,7 +19,7 @@ register:async (req,res)=>{
 
 const userName = await User.findOne({username:newUsername}) 
 if(userName){
-    return res.status(400).json({msg:"User already name exist..!"})
+    return res.status(400).json({msg:"Usern name already exist..!"})
 }
 const userEmail = await User.findOne({email}) 
 if(userEmail){
@@ -70,21 +67,59 @@ res.cookie("socialtoken",refresh_token ,{
     }
 },
 
-login:async (rea,res)=>{
+login:async (req,res)=>{
+    try {
+        const {email,password}= req.body
+
+        // .populate("User", [
+        //     "-password",
+        //     "-password",
+        //     "-default_password",
+        //     "-cart",
+        //     "-favories",
+        //   ]);
+    const user = await User.findOne({email}).populate('followers following',["-password","-defaultpassword"])
+    if (!user) {
+        return res
+          .status(400)
+          .json({ err: `Unauthorized credential..!` });
+      }
+  
+
+const isMatch =await bcrypt.compare(password,user.password)
+
+  if (!isMatch) {
+    return res.status(400).json({ err: "Unauthorized credential..!" });
+  }
+  const access_token = createAccessToken({id:user._id})
+  const refresh_token = refrechToken({id:user._id})
+  res.cookie("socialtoken",refresh_token ,{
+      httpOnly:true,
+      path:"/api/refresh_token",
+      maxAge:30*7*60*24*60*1000
+  })
+  
+  res.json({
+    msg:'Login success',
+    access_token,
+    user:{
+     ...user._doc,
+     password:"",
+     defaultpassword:""
+     
+}} )
+    } catch (error) {
+        return res.status(500).json({msg:error.message})
+    }
+},
+logout:async (req,res)=>{
     try {
         
     } catch (error) {
         return res.status(500).json({msg:error.message})
     }
 },
-logout:async (rea,res)=>{
-    try {
-        
-    } catch (error) {
-        return res.status(500).json({msg:error.message})
-    }
-},
-generateAccessToken:async (rea,res)=>{
+generateAccessToken:async (req,res)=>{
     try {
         
     } catch (error) {
