@@ -1,0 +1,18 @@
+.login_page {
+  width: 100%;
+  min-height: 100vh;
+  background: #fdfdfd;
+  position: relative;
+}
+
+.login_page form{
+    background: var(--white);
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 50px 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+transform: translate(-50%,-50%);
+}
