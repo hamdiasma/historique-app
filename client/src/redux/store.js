@@ -3,6 +3,9 @@ import thunk from "redux-thunk"
 import {composeWithDevTools} from "redux-devtools-extension"
 import rootReducers from "./reducers/index"
 import {Provider} from "react-redux"
+
+
+
 const initailState ={}
 const middleware = [thunk]
 
@@ -15,9 +18,11 @@ const store =  createStore(
 
 
 const DataProvider =({children})=> {
-return <Provider store={store}>
-{children}
-</Provider>
+return(
+     <Provider store={store}>
+     {children}
+    </Provider>
+    )
 }
 
 

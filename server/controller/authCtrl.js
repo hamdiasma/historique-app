@@ -69,28 +69,24 @@ res.cookie("socialtoken",refresh_token ,{
 
 login:async (req,res)=>{
     try {
-        const {email,password}= req.body
+    const {email,password}= req.body
 
-        // .populate("User", [
-        //     "-password",
-        //     "-password",
-        //     "-default_password",
-        //     "-cart",
-        //     "-favories",
-        //   ]);
     const user = await User.findOne({email}).populate('followers following',["-password","-defaultpassword"])
+
     if (!user) {
         return res
           .status(400)
-          .json({ err: `Unauthorized credential..!` });
+          .json({ msg: `Unauthorized credential..!` });
       }
   
 
-const isMatch =await bcrypt.compare(password,user.password)
+       const isMatch =await bcrypt.compare(password,user.password)
 
   if (!isMatch) {
-    return res.status(400).json({ err: "Unauthorized credential..!" });
+    return res.status(400).json({ msg: "Unauthorized credential..!" });
   }
+
+  
   const access_token = createAccessToken({id:user._id})
   const refresh_token = refrechToken({id:user._id})
   res.cookie("socialtoken",refresh_token ,{
@@ -107,7 +103,7 @@ const isMatch =await bcrypt.compare(password,user.password)
      password:"",
      defaultpassword:""
      
-}} )
+         }} )
     } catch (error) {
         return res.status(500).json({msg:error.message})
     }

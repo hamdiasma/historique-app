@@ -16,3 +16,15 @@
   left: 50%;
 transform: translate(-50%,-50%);
 }
+
+.login_page .pass {
+  position: relative;
+}
+
+.login_page .pass small{
+position: absolute;
+top: 50%;
+right: 5px;
+transform: translateY(-50%);
+opacity: 05;
+}

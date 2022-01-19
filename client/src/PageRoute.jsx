@@ -1,30 +1,29 @@
-import React from 'react'
-import {useParams} from 'react-router-dom'
-import NotFound from './components/NotFound';
+import React from "react";
+import { useParams } from "react-router-dom";
+import NotFound from "./components/notFound/NotFound";
 
-const generatePage=(pageName)=>{
-const component =()=> require(`./pages/${pageName}`).default
+const generatePage = (pageName) => {
+  const component = () => require(`./pages/${pageName}`).default;
 
-try {
-    return React.createElement(component())
-} catch (error) {
-    return <NotFound/>
-}
-}
-
+  try {
+    return React.createElement(component());
+  } catch (error) {
+    return <NotFound />;
+  }
+};
 
 export default function PageRoute() {
-    const {page,id} = useParams()
-    console.log(useParams())
+  const { page, id } = useParams();
+  console.log(useParams());
 
-let pageName = ""
+  let pageName = "";
 
-if(id){
-    pageName = `${page}/[id]`
-}else{
-    pageName = `${page}`
-}
+  if (id) {
+    pageName = `${page}/[id]`;
+  } else {
+    pageName = `${page}`;
+  }
 
-console.log(pageName)
-    return generatePage(pageName)
+  console.log(pageName);
+  return generatePage(pageName);
 }
