@@ -32,7 +32,7 @@ const NotifyAlert = () => {
 };
 
 NotifyAlert.propTypes = {
-  //   notType: PropTypes.object.isRequired,
+  notType: PropTypes.object,
 };
 
 export default NotifyAlert;
