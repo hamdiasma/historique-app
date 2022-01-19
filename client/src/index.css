@@ -18,7 +18,7 @@
 
 
 #theme {
-  display: none;
+  /* display: none; */
 }
 
 #theme:checked ~ .App {
@@ -38,6 +38,10 @@
   margin: auto;
 }
 
+
+/* -------loading-------- */
+@import url("./styles/loading.css");
+/* -------loading-------- */
 
 
 /* -------auth-------- */

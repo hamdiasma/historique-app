@@ -1,10 +1,13 @@
 
 import {BrowserRouter as  Router,Route } from "react-router-dom"
+import NotifyAlert from "./components/notify/NotifyAlert";
 import PageRoute from "./PageRoute";
 import Login from "./pages/login";
 function App() {
   return (
     <Router>
+<NotifyAlert/>
+
      <input  type="checkbox" id="theme"/>
     <div className="App">
      <div className="main">
