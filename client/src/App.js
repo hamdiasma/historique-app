@@ -2,7 +2,7 @@
 import React ,{useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {BrowserRouter as  Router,Route } from "react-router-dom"
-import NotifyAlert from "./components/notify/NotifyAlert";
+import NotifyAlert from "./components/alert/NotifyAlert";
 import PageRoute from "./PageRoute";
 import Login from "./pages/login";
 import Home from "./pages/home"
