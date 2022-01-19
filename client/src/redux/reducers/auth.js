@@ -10,6 +10,7 @@ const authReducers = (state = initialState , action)=>{
     const {type,payload} = action
     switch (type) {
         case authTypes.LOGIN_USER:
+            case authTypes.REFRESH_TOKEN:
            return payload
            
         default:
