@@ -14,7 +14,6 @@ const generatePage = (pageName) => {
 
 export default function PageRoute() {
   const { page, id } = useParams();
-  console.log(useParams());
 
   let pageName = "";
 
@@ -24,6 +23,5 @@ export default function PageRoute() {
     pageName = `${page}`;
   }
 
-  console.log(pageName);
   return generatePage(pageName);
 }

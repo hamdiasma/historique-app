@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import AccountDescription from "../components/accountLink/AccountDescription";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/actions/auth";
+import { useHistory } from "react-router-dom";
 
 const Login = (props) => {
   const initialState = {
@@ -14,6 +15,9 @@ const Login = (props) => {
   const [userData, setUserData] = useState(initialState);
   const { email, password } = userData;
   const [typePass, setTypePass] = useState(false);
+  const { auth } = useSelector((state) => state);
+  const history = useHistory();
+
   const handelChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
@@ -25,6 +29,10 @@ const Login = (props) => {
       dispatch(loginAction(userData));
     } catch (error) {}
   };
+
+  useEffect(() => {
+    if (auth.token) history.push("/");
+  }, [auth.token]);
 
   return (
     <div className="login_page">

@@ -2,6 +2,7 @@ import{ authTypes,notifyTypes }  from "../type/types";
 import {postData,getData} from "../../utils/fetchData"
 import axios from "axios";
 import { notifyAction } from "./notyfy";
+import { validation } from "../../utils/validations";
 
 
 
@@ -42,4 +43,30 @@ try {
 } catch (error) {
     dispatch(notifyAction({error:error.response.data.msg}))
 }
+}
+
+
+export const registerAction =(data)=>async dispatch=>{
+    let check = validation(data)
+    if(check.errLength >0){
+     return dispatch({
+         type:notifyTypes.NOTIFY,
+         payload:check.errMsg
+     })
+ }
+    try {       
+     dispatch(notifyAction({loading:true}))
+     const res = await  postData('register',data)
+
+     dispatch({type:authTypes.REGISTER_USER,payload:{
+         token:res.data.access_token,
+         user:res.data.user
+     }})
+
+ localStorage.setItem('socialLogged',true)
+ dispatch(notifyAction({success:res.data.msg}))
+    } catch (error) {
+    dispatch(notifyAction({error:error.response.data.msg}))
+        
+    }
 }

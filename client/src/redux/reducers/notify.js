@@ -11,9 +11,6 @@ const notifyReducers = (state=initialState,action)=>{
     switch (type) {
         case notifyTypes.NOTIFY:
            return payload
-
-            
-    
         default:
         return state;
     }

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Antic+Didone&family=Sail&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lekton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap');
 :root {
   --gray: #ccc;
   --white: #fff;
@@ -7,6 +8,7 @@
   --font-one: 'Antic Didone', serif ;
   --font-two: 'Sail', cursive; 
   --font-three: 'Lekton', sans-serif;
+  --font-foure: 'Montserrat', sans-serif;
 }
 
 * {
@@ -29,7 +31,7 @@
   width: 100%;
   min-height: 100vh;
   background: var(--white);
-  font-family: var(--font-one);
+  font-family: var(--font-foure);
 }
 
 .main {
