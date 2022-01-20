@@ -20,7 +20,7 @@
 
 
 #theme {
-  /* display: none; */
+  display: none;
 }
 
 #theme:checked ~ .App {

@@ -7,6 +7,7 @@ import PageRoute from "./PageRoute";
 import Login from "./pages/login";
 import Home from "./pages/home"
 import { refreshTokenAction } from "./redux/actions/auth";
+import Header from "./components/hedaer/Header";
 function App() {
 const dispatch = useDispatch()
 const {auth} = useSelector(state => state)
@@ -21,9 +22,12 @@ useEffect(()=>{
     <Router>
       <NotifyAlert/>
 
-     <input  type="checkbox" id="theme"/>
+ <input  type="checkbox" id="theme"/>
     <div className="App">
      <div className="main">
+      {
+        auth.token&&  <Header/>
+      }
        <Route exact path="/" component={auth.token?Home : Login}/>
        <Route exact path="/:page" component={PageRoute}/>
        <Route exact path="/:page/:id" component={PageRoute}/>
