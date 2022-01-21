@@ -1,16 +1,42 @@
+.header{
+    position: relative;
+    width: 100%;
+    min-height: 70px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    box-shadow: 0 0 10 #ddd;
+}
+.header .navbar{
+width: 100%;
+height: 100%;
+}
+.header a.logo{
+    text-decoration: none;
+}
+.header .logo h1{
+    font-size: 2rem;
+
+}
 
 .menu  .navbar-nav{
     align-items: center !important;
 }
 .menu .nav-link i::before{
-    font-size: 15px !important;
+    font-size: 22px !important;
     transition: all .3s ease-in-out;
 
 }
 
 .menu .nav-item.active i::before{
-    font-size: 18px !important;
+    font-size: 30px !important;
     color: var( --active-link);
+}
+.menu .dropdown-menu {
+    position: absolute;
+    left: inherit;
+    right: 0;
 }
 
 .menu .dropdown-menu ul ,
