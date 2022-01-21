@@ -50,6 +50,13 @@
 @import url("./header.css");
 /* -------header-------- */
 
+/* -------search-------- */
+@import url("./search.css");
+/* -------search-------- */
+
+/* -------avatar-------- */
+@import url("./avatar.css");
+/* -------avatar-------- */
 
 
 /* -------auth-------- */
