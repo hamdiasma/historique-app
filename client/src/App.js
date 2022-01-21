@@ -9,6 +9,8 @@ import Home from "./pages/home"
 import Register from "./pages/register"
 import { refreshTokenAction } from "./redux/actions/auth";
 import Header from "./components/hedaer/Header";
+import PrivateRouter from "./customRouter/privateRouter";
+
 function App() {
 const dispatch = useDispatch()
 const {auth} = useSelector(state => state)
@@ -32,8 +34,8 @@ useEffect(()=>{
        <Route exact path="/" component={auth.token?Home : Login}/>
        <Route exact path="/login" component={Login}/>
        <Route exact path="/register" component={ Register}/>
-       <Route exact path="/:page" component={PageRoute}/>
-       <Route exact path="/:page/:id" component={PageRoute}/>
+       <PrivateRouter exact path="/:page" component={PageRoute}/>
+       <PrivateRouter exact path="/:page/:id" component={PageRoute}/>
        
        </div>  
   </div>
