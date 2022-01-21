@@ -70,3 +70,16 @@ export const registerAction =(data)=>async dispatch=>{
         
     }
 }
+
+export const logOutAction = ()=>async dispatch=>{
+    try {
+      const res =  await postData("logout")
+        dispatch({
+            type:authTypes.LOGOUT_USER
+        })
+        localStorage.removeItem('socialLogged')
+        dispatch(notifyAction({success:res.data.msg}))
+    } catch (error) {
+        dispatch(notifyAction({error:error.response.data.msg}))
+    }
+}

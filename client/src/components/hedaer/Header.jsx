@@ -5,64 +5,82 @@ import home from "../../images/home.svg";
 import near_me from "../../images/near_me.svg";
 import explore from "../../images/explore.svg";
 import favorite from "../../images/favorite1.svg";
+import { useSelector, useDispatch } from "react-redux";
+import { logOutAction } from "../../redux/actions/auth";
 
 function Header(props) {
   const navLinks = [
-    { label: "Home", icon: home, path: "/" },
-    { label: "Message", icon: near_me, path: "/message" },
-    { label: "Discovre", icon: explore, path: "/discovre" },
-    { label: "Notify", icon: favorite, path: "/notify" },
+    { label: "Home", icon: "fa fa-home", path: "/" },
+    { label: "Message", icon: "fas fa-compass", path: "/message" },
+    { label: "Discovre", icon: "fas fa-location-arrow", path: "/discovre" },
+    { label: "Notify", icon: "fa fa-heart", path: "/notify" },
   ];
+  const dispatch = useDispatch();
+  const { auth } = useSelector((state) => state);
+  const { pathname } = useLocation();
+
+  console.log(pathname);
+
+  const isActive = (page) => {
+    if (page === pathname) {
+      return "active";
+    } else {
+      return "";
+    }
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between align-middle">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/">
           H-BRO
-        </a>
+        </Link>
         <div className="menu">
           <ul className="navbar-nav flex-row mb-2 mb-lg-0">
             {navLinks.map((navlink, i) => (
-              <li className="nav-item" key={i}>
+              <li className={`nav-item ${isActive(navlink.path)}`} key={i}>
                 <Link
-                  className="nav-link active"
+                  className="nav-link"
                   aria-current="page"
                   to={navlink.path}
                 >
                   <span className="material-icons-outlined">
-                    <img src={navlink.icon} alt="" />
+                    <i className={`${navlink.icon} `}></i>
                   </span>
                 </Link>
               </li>
             ))}
             <li className="nav-item dropdown">
-              <a
+              <span
                 className="nav-link dropdown-toggle"
-                href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 User
-              </a>
+              </span>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to="/">
                     profile
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to="/">
                     dark mode
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Link
+                    className="dropdown-item"
+                    to="/"
+                    onClick={() => dispatch(logOutAction())}
+                  >
                     logout
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
