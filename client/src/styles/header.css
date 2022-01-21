@@ -1,5 +1,7 @@
 
-
+.menu  .navbar-nav{
+    align-items: center !important;
+}
 .menu .nav-link i::before{
     font-size: 15px !important;
     transition: all .3s ease-in-out;
@@ -8,5 +10,26 @@
 
 .menu .nav-item.active i::before{
     font-size: 18px !important;
-    color: red;
+    color: var( --active-link);
+}
+
+.menu .dropdown-menu ul ,
+.dropdown-item{
+    font-size: 14px;
+}
+
+.menu .fa-sun::before{
+color: #f1f106ee;
+}
+
+.menu .fa-moon::before{
+color: #000;
+}
+
+.menu .user_avatar{
+    width: 40px;
+    height: 40px;
+    border-radius:50% ;
+    object-fit: cover;
+
 }

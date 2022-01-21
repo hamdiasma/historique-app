@@ -4,7 +4,7 @@
 :root {
   --gray: #ccc;
   --white: #fff;
- 
+ --active-link:#8d1d1d;
   --font-one: 'Antic Didone', serif ;
   --font-two: 'Sail', cursive; 
   --font-three: 'Lekton', sans-serif;

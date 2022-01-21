@@ -7,6 +7,8 @@ import explore from "../../images/explore.svg";
 import favorite from "../../images/favorite1.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { logOutAction } from "../../redux/actions/auth";
+import { themeType } from "../../redux/type/types";
+import Avatar from "../avatar/Avatar";
 
 function Header(props) {
   const navLinks = [
@@ -16,10 +18,8 @@ function Header(props) {
     { label: "Notify", icon: "fa fa-heart", path: "/notify" },
   ];
   const dispatch = useDispatch();
-  const { auth } = useSelector((state) => state);
+  const { auth, theme } = useSelector((state) => state);
   const { pathname } = useLocation();
-
-  console.log(pathname);
 
   const isActive = (page) => {
     if (page === pathname) {
@@ -32,14 +32,14 @@ function Header(props) {
     <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between align-middle">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          H-BRO
+          <h1 className="navbar-brand text-uppercase p-0 m-0">Social-media</h1>
         </Link>
         <div className="menu">
           <ul className="navbar-nav flex-row mb-2 mb-lg-0">
             {navLinks.map((navlink, i) => (
-              <li className={`nav-item ${isActive(navlink.path)}`} key={i}>
+              <li className={`nav-item px-2 ${isActive(navlink.path)}`} key={i}>
                 <Link
-                  className="nav-link"
+                  className="nav-link "
                   aria-current="page"
                   to={navlink.path}
                 >
@@ -57,34 +57,49 @@ function Header(props) {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                User
+                <Avatar src={auth.user.avatar} theme={theme} />
               </span>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <Link className="dropdown-item" to="/">
-                    profile
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/">
-                    dark mode
-                  </Link>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <Link
-                    className="dropdown-item"
-                    to="/"
-                    onClick={() => dispatch(logOutAction())}
-                  >
-                    logout
-                  </Link>
-                </li>
+                <Link
+                  className="dropdown-item"
+                  to={`/profile/${auth.user._id}`}
+                >
+                  Profile
+                </Link>
+                <label
+                  className="dropdown-item"
+                  htmlFor="theme"
+                  onClick={() =>
+                    dispatch({
+                      type: themeType.THEME,
+                      payload: !theme,
+                    })
+                  }
+                >
+                  {!theme ? (
+                    <>
+                      {" "}
+                      <i className="fas fa-moon"></i> dark
+                    </>
+                  ) : (
+                    <>
+                      {" "}
+                      <i className="far fa-sun "></i> light
+                    </>
+                  )}
+                </label>
+                <hr className="dropdown-divider" />
+                <Link
+                  className="dropdown-item"
+                  to="/"
+                  onClick={() => dispatch(logOutAction())}
+                >
+                  logout
+                </Link>
               </ul>
             </li>
           </ul>
+
           {/* <form className="d-flex">
             <input
               className="form-control me-2"

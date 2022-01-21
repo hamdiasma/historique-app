@@ -8,3 +8,7 @@ export const authTypes = {
 export const notifyTypes = {
     NOTIFY:"NOTIFY",
 }
+
+export const themeType={
+    THEME:"THEME"
+}
