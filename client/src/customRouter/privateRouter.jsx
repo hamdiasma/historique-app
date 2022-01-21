@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-function privateRouter({ props }) {
+function privateRouter(props) {
   const docialLogged = localStorage.getItem("socialLogged");
   return docialLogged ? <Route {...props} /> : <Redirect to="/" />;
 }

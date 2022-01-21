@@ -15,7 +15,7 @@ const authReducers = (state = initialState , action)=>{
            return payload
         
            case authTypes.LOGOUT_USER:
-            return {}   
+            return payload   
         default:
         return state;
     }

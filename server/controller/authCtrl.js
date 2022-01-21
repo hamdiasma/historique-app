@@ -127,20 +127,20 @@ generateAccessToken:async (req,res)=>{
         if(!refresh_token){
         return res
           .status(400)
-          .json({ err: `Authentication denied.!` });
+          .json({ msg: `Authentication denied.!` });
         }
 
 await jwt.verify(refresh_token,process.env.REFRESH_TOKEN_SECRET,async (err,result)=>{
     if(err)  return res
     .status(400)
-    .json({ err: `Authentication denied.!` });
+    .json({ msg: `Authentication denied.!` });
 const user = await User.findById(result.id)
 .select(["-password","-defaultpassword"])
 .populate('followers following',["-password","-defaultpassword"])
 
     if(!user)  return res
     .status(400)
-    .json({ err: `Authentication denied.!` });
+    .json({ msg: `Authentication denied.!` });
 
     const access_token = createAccessToken({id:result.id})
         res.json({

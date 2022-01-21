@@ -38,8 +38,6 @@ try {
     }})
     dispatch(notifyAction({loading:false}))
    }
-  
-
 } catch (error) {
     dispatch(notifyAction({error:error.response.data.msg}))
 }
@@ -75,10 +73,10 @@ export const logOutAction = ()=>async dispatch=>{
     try {
       const res =  await postData("logout")
         dispatch({
-            type:authTypes.LOGOUT_USER
+            type:authTypes.LOGOUT_USER,payload:{ }
         })
         localStorage.removeItem('socialLogged')
-        dispatch(notifyAction({success:res.data.msg}))
+        dispatch(notifyAction({success:res.data.msg,}))
     } catch (error) {
         dispatch(notifyAction({error:error.response.data.msg}))
     }

@@ -16,9 +16,7 @@ const dispatch = useDispatch()
 const {auth} = useSelector(state => state)
 
 useEffect(()=>{
-
   dispatch(refreshTokenAction())
-
 },[])
 
   return (
@@ -31,12 +29,13 @@ useEffect(()=>{
       {
         auth.token&&  <Header/>
       }
+
        <Route exact path="/" component={auth.token?Home : Login}/>
        <Route exact path="/login" component={Login}/>
        <Route exact path="/register" component={ Register}/>
+
        <PrivateRouter exact path="/:page" component={PageRoute}/>
        <PrivateRouter exact path="/:page/:id" component={PageRoute}/>
-       
        </div>  
   </div>
   </Router>
