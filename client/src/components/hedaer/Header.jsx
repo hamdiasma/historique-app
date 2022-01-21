@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-import home from "../../images/home.svg";
-import near_me from "../../images/near_me.svg";
-import explore from "../../images/explore.svg";
-import favorite from "../../images/favorite1.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { logOutAction } from "../../redux/actions/auth";
 import { themeType } from "../../redux/type/types";
@@ -13,8 +9,8 @@ import Avatar from "../avatar/Avatar";
 function Header(props) {
   const navLinks = [
     { label: "Home", icon: "fa fa-home", path: "/" },
-    { label: "Message", icon: "fas fa-compass", path: "/message" },
-    { label: "Discovre", icon: "fas fa-location-arrow", path: "/discovre" },
+    { label: "Message", icon: "fas fa-location-arrow", path: "/message" },
+    { label: "Discovre", icon: "fas  fa-compass ", path: "/discover" },
     { label: "Notify", icon: "fa fa-heart", path: "/notify" },
   ];
   const dispatch = useDispatch();
