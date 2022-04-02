@@ -3,19 +3,18 @@ import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { logOutAction } from "../../redux/actions/auth";
-import { themeType } from "../../redux/type/types";
 import Avatar from "../avatar/Avatar";
 
 function Menu(props) {
   const dispatch = useDispatch();
 
   const navLinks = [
-    { label: "Home", icon: "fa fa-home", path: "/" },
-    { label: "Message", icon: "fas fa-location-arrow", path: "/message" },
-    { label: "Discovre", icon: "fas  fa-compass ", path: "/discover" },
-    { label: "Notify", icon: "fa fa-heart", path: "/notify" },
+    { label: "home", path: "/" },
+    { label: "products", path: "/products" },
+    { label: "historique", icon: "fas  fa-compass ", path: "/historique" },
   ];
-  const { auth, theme } = useSelector((state) => state);
+
+  const { auth } = useSelector((state) => state);
   const { pathname } = useLocation();
   const isActive = (page) => {
     if (page === pathname) {
@@ -24,6 +23,7 @@ function Menu(props) {
       return "";
     }
   };
+
   return (
     <div className="menu">
       <ul className="navbar-nav flex-row mb-2 mb-lg-0">
@@ -31,7 +31,7 @@ function Menu(props) {
           <li className={`nav-item px-2 ${isActive(navlink.path)}`} key={i}>
             <Link className="nav-link " aria-current="page" to={navlink.path}>
               <span className="material-icons-outlined">
-                <i className={`${navlink.icon} `}></i>
+                <i>{navlink.label}</i>
               </span>
             </Link>
           </li>
@@ -50,28 +50,7 @@ function Menu(props) {
             <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
               Profile
             </Link>
-            <label
-              className="dropdown-item"
-              htmlFor="theme"
-              onClick={() =>
-                dispatch({
-                  type: themeType.THEME,
-                  payload: !theme,
-                })
-              }
-            >
-              {!theme ? (
-                <>
-                  {" "}
-                  <i className="fas fa-moon"></i> dark
-                </>
-              ) : (
-                <>
-                  {" "}
-                  <i className="far fa-sun "></i> light
-                </>
-              )}
-            </label>
+
             <hr className="dropdown-divider" />
             <Link
               className="dropdown-item"

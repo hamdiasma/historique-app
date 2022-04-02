@@ -10,14 +10,20 @@ import Register from "./pages/register"
 import { refreshTokenAction } from "./redux/actions/auth";
 import Header from "./components/hedaer/Header";
 import PrivateRouter from "./customRouter/privateRouter";
+import { getHistoriques } from "./redux/actions/historique";
+import { getProducts } from "./redux/actions/product";
 
 function App() {
 const dispatch = useDispatch()
 const {auth} = useSelector(state => state)
 
 useEffect(()=>{
-  dispatch(refreshTokenAction())
-},[])
+if(auth.token) { dispatch(refreshTokenAction())
+  dispatch(getHistoriques())
+  dispatch(getProducts(auth.token))
+
+}
+},[dispatch,auth.token])
 
   return (
     <Router>
@@ -30,12 +36,12 @@ useEffect(()=>{
         auth.token&&  <Header/>
       }
 
-       <Route exact path="/" component={auth.token?Home : Login}/>
+      <div className="container my-5">
+      <Route exact path="/" component={auth.token?Home : Login}/>
        <Route exact path="/login" component={Login}/>
        <Route exact path="/register" component={ Register}/>
-
        <PrivateRouter exact path="/:page" component={PageRoute}/>
-       <PrivateRouter exact path="/:page/:id" component={PageRoute}/>
+      </div>
        </div>  
   </div>
   </Router>

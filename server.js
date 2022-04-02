@@ -31,6 +31,8 @@ mongoose.connect(db,{
 // routes 
 
 app.use("/api",require("./server/routers/userRouters"))
+app.use("/api",require("./server/routers/historiqueRouters"))
+app.use("/api",require("./server/routers/productsRouters"))
 
 
 const PORT = process.env.PORT || 5000;
